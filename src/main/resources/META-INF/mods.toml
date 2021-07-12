@@ -1,6 +1,5 @@
 modLoader="javafml" #mandatory
 loaderVersion="[36,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
-license="All rights reserved"
 issueTrackerURL="https://github.com/FloweyTheFlower420/rebark-forge/issues"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/rebark"
 authors="FloweyTF"
