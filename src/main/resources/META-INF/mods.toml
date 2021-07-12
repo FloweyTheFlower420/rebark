@@ -1,0 +1,26 @@
+modLoader="javafml" #mandatory
+loaderVersion="[36,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+license="All rights reserved"
+[[mods]]
+modId="rebark" #mandatory
+version="${file.jarVersion}" #mandatory
+displayName="ReBark" #mandatory
+logoFile="rebark_mod.png" #optional
+credits="https://www.reddit.com/r/MinecraftCommands/comments/oiaoxl/i_created_a_vanilla_friendly_way_to_undo_all/"
+authors="FloweyTF"
+description='''
+Don't you hate it when you accidentally strip logs, and have no way to replace it?
+This mod is for you! Inspired by a datapack, this is now a full mod!
+'''
+[[dependencies.rebark]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.rebark]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.5,1.17)"
+    ordering="NONE"
+    side="BOTH"

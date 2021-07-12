@@ -1,0 +1,52 @@
+package com.floweytf.rebark;
+
+import net.minecraft.entity.item.ItemEntity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.AxeItem;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.Direction;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.RayTraceContext;
+import net.minecraft.util.math.vector.Vector3d;
+import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeMod;
+import net.minecraftforge.common.ToolType;
+import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
+public class EventHandler {
+    @SubscribeEvent
+    public static void onToolUse(final BlockEvent.BlockToolInteractEvent event) {
+        ItemStack heldItem = event.getHeldItemStack();
+        PlayerEntity player = event.getPlayer();
+        // no fucking clue
+        if(heldItem.getItem().getToolTypes(heldItem).contains(ToolType.AXE) &&
+            AxeItem.STRIPABLES.containsKey(event.getState().getBlock())) {
+            World world = event.getPlayer().level;
+            ItemStack itemStack = new ItemStack(RebarkMain.BARK.get());
+            BlockPos pos = rayTrace(world, player, event.getPos());
+
+            world.addFreshEntity(new ItemEntity(
+                world,
+                pos.getX() + .5f,
+                pos.getY() + .3f,
+                pos.getZ() + .5f,
+                itemStack
+            ));
+        }
+    }
+
+    private static BlockPos rayTrace(World world, PlayerEntity player, BlockPos pos) {
+        Vector3d eyePos = player.getEyePosition(1);
+        Vector3d lookPos = player.getViewVector(1);
+        double length = player.getAttributeValue(ForgeMod.REACH_DISTANCE.get()) + 1;
+        Vector3d endPos = eyePos.add(lookPos.x * length, lookPos.y * length, lookPos.z * length);
+        RayTraceContext context = new RayTraceContext(eyePos, endPos, RayTraceContext.BlockMode.OUTLINE, RayTraceContext.FluidMode.NONE, player);
+        BlockRayTraceResult result = world.clip(context);
+        Direction side = result.getDirection();
+        return pos.relative(side);
+    }
+}
