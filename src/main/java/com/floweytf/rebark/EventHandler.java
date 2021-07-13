@@ -14,8 +14,12 @@ import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.event.world.BlockEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventHandler {
@@ -26,7 +30,16 @@ public class EventHandler {
     }
 
     @SubscribeEvent
-    public static void onToolUse(final BlockEvent.BlockToolInteractEvent event) {
+    public void onWorldLoad(WorldEvent.Load event) {
+        if (BarkItem.UNSTRIP == null) {
+            BarkItem.UNSTRIP = AxeItem.STRIPABLES.entrySet()
+                .stream()
+                .collect(Collectors.toMap(Map.Entry::getValue, Map.Entry::getKey));
+        }
+    }
+
+    @SubscribeEvent
+    public static void onToolUse(BlockEvent.BlockToolInteractEvent event) {
         ItemStack heldItem = event.getHeldItemStack();
         PlayerEntity player = event.getPlayer();
         // no fucking clue
