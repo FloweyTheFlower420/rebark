@@ -12,12 +12,19 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventHandler {
+    @SubscribeEvent
+    public void onFurnaceFuelBurnTimeEvent(FurnaceFuelBurnTimeEvent event) {
+        if(event.getItemStack().getItem() == RebarkMain.BARK.get())
+            event.setBurnTime(100);
+    }
+
     @SubscribeEvent
     public static void onToolUse(final BlockEvent.BlockToolInteractEvent event) {
         ItemStack heldItem = event.getHeldItemStack();
