@@ -30,7 +30,7 @@ public class EventHandler {
     }
 
     @SubscribeEvent
-    public void onWorldLoad(WorldEvent.Load event) {
+    public static void onWorldLoad(WorldEvent.Load event) {
         if (BarkItem.UNSTRIP == null) {
             BarkItem.UNSTRIP = AxeItem.STRIPABLES.entrySet()
                 .stream()
