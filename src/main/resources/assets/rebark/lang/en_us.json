@@ -1,3 +1,5 @@
 {
-  "item.rebark.bark": "Bark"
+  "item.rebark.bark": "Bark",
+  "advancements.advancements.rebark.title": "Bark Restored",
+  "advancements.story.rebark.description": "Add bark back to a stripped log"
 }

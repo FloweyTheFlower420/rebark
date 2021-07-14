@@ -1,0 +1,30 @@
+{
+  "parent": "minecraft:adventure/root",
+  "display": {
+    "icon": {
+      "item": "rebark:bark"
+    },
+    "title": {
+      "translate": "advancements.advancements.rebark.title"
+    },
+    "description": {
+      "translate": "advancements.story.rebark.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "requirement": {
+      "trigger": "minecraft:item_used_on_block",
+      "conditions": {
+        "player": [],
+        "item": {
+          "item": "rebark:bark"
+        },
+        "location": {}
+      }
+    }
+  }
+}
