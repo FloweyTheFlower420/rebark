@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventHandler {
     @SubscribeEvent
-    public void onFurnaceFuelBurnTimeEvent(FurnaceFuelBurnTimeEvent event) {
+    public static void onFurnaceFuelBurnTimeEvent(FurnaceFuelBurnTimeEvent event) {
         if(event.getItemStack().getItem() == RebarkMain.BARK.get())
             event.setBurnTime(100);
     }

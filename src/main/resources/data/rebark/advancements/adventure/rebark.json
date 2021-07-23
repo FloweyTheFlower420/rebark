@@ -23,7 +23,11 @@
         "item": {
           "item": "rebark:bark"
         },
-        "location": {}
+        "location": {
+          "block": {
+            "tag": "minecraft:logs"
+          }
+        }
       }
     }
   }
