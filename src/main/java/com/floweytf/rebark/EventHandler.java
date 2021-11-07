@@ -16,6 +16,7 @@ import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fml.common.Mod;
 
 import java.util.Map;
@@ -27,6 +28,7 @@ public class EventHandler {
     public static void onFurnaceFuelBurnTimeEvent(FurnaceFuelBurnTimeEvent event) {
         if(event.getItemStack().getItem() == RebarkMain.BARK.get())
             event.setBurnTime(100);
+        Fluid
     }
 
     @SubscribeEvent
@@ -42,8 +44,7 @@ public class EventHandler {
     public static void onToolUse(BlockEvent.BlockToolInteractEvent event) {
         ItemStack heldItem = event.getHeldItemStack();
         PlayerEntity player = event.getPlayer();
-        // no fucking clue
-        if(heldItem.getItem().getToolTypes(heldItem).contains(ToolType.AXE) &&
+        // no fucking clue olTypes(heldItem).contains(ToolType.AXE) &&
             AxeItem.STRIPABLES.containsKey(event.getState().getBlock())) {
             World world = event.getPlayer().level;
             ItemStack itemStack = new ItemStack(RebarkMain.BARK.get());
