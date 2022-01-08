@@ -4,6 +4,7 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
@@ -42,9 +43,9 @@ public class EventHandler {
     public static void onToolUse(BlockEvent.BlockToolInteractEvent event) {
         ItemStack heldItem = event.getHeldItemStack();
         PlayerEntity player = event.getPlayer();
-        // no fucking clue
         if(heldItem.getItem().getToolTypes(heldItem).contains(ToolType.AXE) &&
-            AxeItem.STRIPABLES.containsKey(event.getState().getBlock())) {
+            AxeItem.STRIPABLES.containsKey(event.getState().getBlock()) &&
+            DataReloadListener.getInstance().testRebark(event.getState().getBlock())) {
             World world = event.getPlayer().level;
             ItemStack itemStack = new ItemStack(RebarkMain.BARK.get());
             BlockPos pos = rayTrace(world, player, event.getPos());
