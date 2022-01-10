@@ -1,6 +1,5 @@
 package com.floweytf.rebark;
 
-
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraftforge.common.MinecraftForge;

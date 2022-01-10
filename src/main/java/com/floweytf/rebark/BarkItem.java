@@ -6,6 +6,10 @@ import net.minecraft.block.RotatedPillarBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemUseContext;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ITag;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.Tag;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
@@ -30,7 +34,7 @@ public class BarkItem extends Item {
         if(!UNSTRIP.containsKey(block))
             return ActionResultType.PASS;
         Block output = UNSTRIP.get(block);
-        if(!DataReloadListener.getInstance().testRebark(output))
+        if(!Tags.validateRebark(output))
             return ActionResultType.FAIL;
         BlockState outputState = output.defaultBlockState().setValue(
             RotatedPillarBlock.AXIS,

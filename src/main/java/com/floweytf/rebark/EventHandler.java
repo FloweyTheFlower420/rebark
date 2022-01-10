@@ -1,9 +1,12 @@
 package com.floweytf.rebark;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ITag;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
@@ -13,6 +16,7 @@ import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.ToolType;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.furnace.FurnaceFuelBurnTimeEvent;
 import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -24,6 +28,7 @@ import java.util.stream.Collectors;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventHandler {
+
     @SubscribeEvent
     public static void onFurnaceFuelBurnTimeEvent(FurnaceFuelBurnTimeEvent event) {
         if(event.getItemStack().getItem() == RebarkMain.BARK.get())
@@ -45,7 +50,7 @@ public class EventHandler {
         PlayerEntity player = event.getPlayer();
         if(heldItem.getItem().getToolTypes(heldItem).contains(ToolType.AXE) &&
             AxeItem.STRIPABLES.containsKey(event.getState().getBlock()) &&
-            DataReloadListener.getInstance().testRebark(event.getState().getBlock())) {
+            Tags.validateStrip(event.getState().getBlock())) {
             World world = event.getPlayer().level;
             ItemStack itemStack = new ItemStack(RebarkMain.BARK.get());
             BlockPos pos = rayTrace(world, player, event.getPos());
